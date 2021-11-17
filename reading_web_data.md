@@ -17,3 +17,42 @@ library(tidyverse)
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
+
+``` r
+library(rvest)
+```
+
+    ## 
+    ## Attaching package: 'rvest'
+
+    ## The following object is masked from 'package:readr':
+    ## 
+    ##     guess_encoding
+
+``` r
+library(httr)
+```
+
+## Scraping Table from Webpage
+
+Acquiring data from Table 1 on [this
+page](http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm)
+
+``` r
+url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+
+# reading in drug use html
+
+drug_use_html = read_html(url)
+
+# extracting table(s)
+# look at `first` options to select different rows
+
+marijuana_use = 
+  drug_use_html %>% 
+  html_nodes(css = "table") %>%
+  first() %>% 
+  html_table() %>%
+  slice(-1) %>% 
+  as_tibble()
+```
