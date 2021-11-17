@@ -160,3 +160,13 @@ brfss_csv =
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+# Pokemon data
+
+``` r
+# the following is a mess
+
+poke_data = 
+  GET("https://pokeapi.co/api/v2/pokemon/1") %>% 
+  content()
+```

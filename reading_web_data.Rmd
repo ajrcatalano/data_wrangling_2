@@ -100,3 +100,13 @@ brfss_csv =
   content("parsed")
 ```
 
+# Pokemon data
+
+```{r}
+# the following is a mess
+
+poke_data = 
+  GET("https://pokeapi.co/api/v2/pokemon/1") %>% 
+  content()
+```
+
