@@ -96,7 +96,7 @@ brfss_csv =
 
 brfss_csv = 
   GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
-      query = list("$limit" = 150000)) %>% 
+      query = list("$limit" = 5000)) %>% 
   content("parsed")
 ```
 

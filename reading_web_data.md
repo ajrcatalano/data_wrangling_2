@@ -145,11 +145,11 @@ brfss_csv =
 
 brfss_csv = 
   GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
-      query = list("$limit" = 150000)) %>% 
+      query = list("$limit" = 5000)) %>% 
   content("parsed")
 ```
 
-    ## Rows: 134203 Columns: 23
+    ## Rows: 5000 Columns: 23
 
     ## ── Column specification ────────────────────────────────────────────────────────
     ## Delimiter: ","
