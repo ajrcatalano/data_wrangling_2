@@ -1,0 +1,11 @@
+---
+title: "Strings and Factors"
+author: "AJ Catalano"
+date: "11/17/2021"
+output: github_document
+---
+
+```{r}
+library(rvest)
+```
+
