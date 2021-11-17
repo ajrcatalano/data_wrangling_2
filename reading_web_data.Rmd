@@ -16,11 +16,11 @@ library(httr)
 Acquiring data from Table 1 on [this page](http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm)
 
 ```{r}
-url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+marijuana_url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
 
 # reading in drug use html
 
-drug_use_html = read_html(url)
+drug_use_html = read_html(marijuana_url)
 
 # extracting table(s)
 # look at `first` options to select different rows
@@ -32,5 +32,36 @@ marijuana_use =
   html_table() %>%
   slice(-1) %>% 
   as_tibble()
+```
+
+## Scraping from something other than a table
+
+Star Wars films data from [IMDb](https://www.imdb.com/list/ls070150896/)
+
+```{r}
+sw_url = "https://www.imdb.com/list/ls070150896/"
+
+star_wars_html = read_html(sw_url)
+
+title_vec = 
+  star_wars_html %>% 
+  html_nodes(css = ".lister-item-header a") %>% 
+  html_text()
+
+gross_rev_vec = 
+  star_wars_html %>% 
+  html_nodes(css = ".text-small:nth-child(7) span:nth-child(5)") %>% 
+  html_text()
+
+runtime_vec = 
+  star_wars_html %>% 
+  html_nodes(css = ".runtime") %>% 
+  html_text()
+
+starwars_df = 
+  tibble(
+    title = title_vec,
+    gross_rev = gross_rev_vec,
+    runtime = runtime_vec)
 ```
 
