@@ -83,3 +83,20 @@ nyc_water_json =
   as_tibble()
 ```
 
+# BRFSS data
+
+```{r}
+# CSV
+
+brfss_csv = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv") %>% 
+  content("parsed")
+
+# note that brfss_csv has 1000 rows, but the webpage dataset has 134k rows! Adjust query parameters:
+
+brfss_csv = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
+      query = list("$limit" = 150000)) %>% 
+  content("parsed")
+```
+
