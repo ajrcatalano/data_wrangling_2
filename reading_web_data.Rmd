@@ -65,3 +65,21 @@ starwars_df =
     runtime = runtime_vec)
 ```
 
+## water data API
+
+```{r}
+# CSV
+
+nyc_water_csv = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.csv") %>% 
+  content("parsed")
+
+# JSON
+
+nyc_water_json = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.json") %>% 
+  content("text") %>% 
+  jsonlite::fromJSON() %>% 
+  as_tibble()
+```
+

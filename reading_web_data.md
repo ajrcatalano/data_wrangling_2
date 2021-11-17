@@ -87,3 +87,33 @@ starwars_df =
     gross_rev = gross_rev_vec,
     runtime = runtime_vec)
 ```
+
+## water data API
+
+``` r
+# CSV
+
+nyc_water_csv = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.csv") %>% 
+  content("parsed")
+```
+
+    ## Rows: 42 Columns: 4
+
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## dbl (4): year, new_york_city_population, nyc_consumption_million_gallons_per...
+
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+# JSON
+
+nyc_water_json = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.json") %>% 
+  content("text") %>% 
+  jsonlite::fromJSON() %>% 
+  as_tibble()
+```
