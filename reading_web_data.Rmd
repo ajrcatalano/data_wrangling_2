@@ -65,6 +65,35 @@ starwars_df =
     runtime = runtime_vec)
 ```
 
+```{r}
+# flagstaff restaurants on yelp; page 1
+
+flagstaff_url = ("https://www.yelp.com/search?find_desc=Restaurants&find_loc=Flagstaff%2C+AZ%2C+United+States&ns=1")
+
+flagstaff_html = read_html(flagstaff_url)
+
+flagstaff_food =
+  flagstaff_html %>% 
+  html_nodes(css = ".css-1hi12yn .css-1422juy") %>% 
+  html_text()
+
+# page 2
+
+flagstaff_url_2 = "https://www.yelp.com/search?find_desc=Restaurants&find_loc=Flagstaff%2C%20AZ%2C%20United%20States&ns=1&start=10"
+
+flagstaff_html_2 = read_html(flagstaff_url_2)
+
+flagstaff_food_2 =
+  flagstaff_html_2 %>% 
+  html_nodes(css = ".css-1hi12yn .css-1422juy") %>% 
+  html_text()
+
+# a tibble
+
+flagstaff_restaurants =
+  tibble(restaurants = c(flagstaff_food, flagstaff_food_2))
+```
+
 ## water data API
 
 ```{r}
