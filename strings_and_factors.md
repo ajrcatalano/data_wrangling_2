@@ -208,7 +208,7 @@ as.numeric(factor_vec)
 
     ## [1] 1 1 2 2
 
-## NSDUH
+## NSDUH - Strings
 
 ``` r
 nsduh_url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
@@ -237,3 +237,27 @@ data_marj =
   ) %>% 
   filter(!(State %in% c("Total U.S.", "Northeast", "Midwest", "South", "West")))
 ```
+
+## NSDUH - Factors
+
+``` r
+data_marj %>% 
+  filter(age == "12-17") %>% 
+  mutate(State = fct_relevel(State, "Texas", "Oklahoma")) %>% 
+  ggplot(aes(x = State, y = percent, color = year))+
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+<img src="strings_and_factors_files/figure-gfm/unnamed-chunk-12-1.png" width="90%" />
+
+``` r
+data_marj %>% 
+  filter(age == "12-17") %>% 
+  mutate(State = fct_reorder(State, percent)) %>% 
+  ggplot(aes(x = State, y = percent, color = year)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+<img src="strings_and_factors_files/figure-gfm/unnamed-chunk-12-2.png" width="90%" />
